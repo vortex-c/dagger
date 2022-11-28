@@ -3,8 +3,9 @@ package com.example.daggert.act1
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import javax.inject.Inject
 
-class MainViewModel(val repo: MainRepository): ViewModel() {
+class MainViewModel @Inject constructor (val repo: MainRepository): ViewModel() {
     private val data = mutableListOf(1,2,3)
     fun getData(): List<Int> {
         return data.toList()
@@ -18,13 +19,6 @@ class MainViewModel(val repo: MainRepository): ViewModel() {
         super.onCleared()
         Log.e("Main", "ViewModel Destroyed")
     }
-
 }
 
-
-class MainViewModelFactory(val repo: MainRepository):ViewModelProvider.Factory{
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return  MainViewModel(repo) as T
-    }
-}
 
